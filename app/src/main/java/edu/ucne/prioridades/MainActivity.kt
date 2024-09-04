@@ -91,6 +91,7 @@ fun PrioridadScreen(prioridadDb: PrioridadDB) {
                 modifier = Modifier.fillMaxWidth(),
                 label = { Text(text = "Descripción") },
                 value = descripcion,
+                textStyle = TextStyle(textAlign = TextAlign.Center),
                 onValueChange = {
                     descripcion = it
                     errorMessage = ""
@@ -102,6 +103,7 @@ fun PrioridadScreen(prioridadDb: PrioridadDB) {
                 modifier = Modifier.fillMaxWidth(),
                 label = { Text(text = "Días compromiso") },
                 value = diasCompromiso,
+                textStyle = TextStyle(textAlign = TextAlign.Center),
                 onValueChange = {
                     diasCompromiso = it
                     errorMessage = ""
