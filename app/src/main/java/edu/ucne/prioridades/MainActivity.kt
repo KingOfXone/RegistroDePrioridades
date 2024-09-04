@@ -4,29 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -144,17 +128,24 @@ fun PrioridadScreen(prioridadDb: PrioridadDB) {
                             return@launch
                         }
 
-                        val diasCompromisoInt = diasCompromiso.toIntOrNull()
-                        if (diasCompromisoInt == null || diasCompromisoInt <= 0) {
-                            errorMessage = "Deben ser un número mayor que 0."
+                        if (!descripcion.all { it.isLetterOrDigit() || it.isWhitespace() }) {
+                            errorMessage = "La descripción solo puede contener letras, números y espacios."
                             return@launch
                         }
+
+                        val diasCompromisoInt = diasCompromiso.toIntOrNull()
+                        if (diasCompromisoInt == null || diasCompromisoInt <= 0) {
+                            errorMessage = "El número de días debe ser un número entero positivo mayor que 0."
+                            return@launch
+                        }
+
 
                         val prioridadExistente = prioridadDb.prioridadDAO().findByDescription(descripcion)
                         if (prioridadExistente != null) {
                             errorMessage = "Ya existe una prioridad con esta descripción."
                             return@launch
                         }
+
 
                         val nuevaPrioridad = PrioridadEntity(
                             descripcion = descripcion,
@@ -163,6 +154,7 @@ fun PrioridadScreen(prioridadDb: PrioridadDB) {
                         prioridadDb.prioridadDAO().save(nuevaPrioridad)
                         descripcion = ""
                         diasCompromiso = ""
+                        errorMessage = ""
                     }
                 }
             ) {
