@@ -23,20 +23,20 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.room.Room
-import edu.ucne.prioridades.data.database.PrioridadDB
+import edu.ucne.prioridades.data.database.PrioridadDb
 import edu.ucne.prioridades.data.entities.PrioridadEntity
 import edu.ucne.prioridades.ui.theme.PrioridadesTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    private lateinit var prioridadDB: PrioridadDB
+    private lateinit var prioridadDB: PrioridadDb
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         prioridadDB = Room.databaseBuilder(
             applicationContext,
-            PrioridadDB::class.java,
+            PrioridadDb::class.java,
             "Prioridad.db"
         ).fallbackToDestructiveMigration()
             .build()
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PrioridadScreen(prioridadDb: PrioridadDB) {
+fun PrioridadScreen(prioridadDb: PrioridadDb) {
     var descripcion by remember { mutableStateOf("") }
     var diasCompromiso by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf("") }

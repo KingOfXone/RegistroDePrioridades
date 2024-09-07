@@ -14,7 +14,7 @@ interface PrioridadDao {
     @Query(
         """
             SELECT * 
-            FROM Prioridad
+            FROM Prioridades
             WHERE prioridadid =:id
             LIMIT 1
         """
@@ -24,7 +24,7 @@ interface PrioridadDao {
     @Query(
         """
             SELECT *
-            FROM Prioridad
+            FROM Prioridades
             WHERE LOWER(:descripcion)
             LIMIT 1
         """
@@ -32,7 +32,7 @@ interface PrioridadDao {
     suspend fun findByDescription(descripcion: String): PrioridadEntity?
     @Delete
     suspend fun delete (prioridad: PrioridadEntity)
-    @Query("SELECT * FROM Prioridad")
+    @Query("SELECT * FROM Prioridades")
     fun getAll(): Flow<List<PrioridadEntity>>
 
 }
