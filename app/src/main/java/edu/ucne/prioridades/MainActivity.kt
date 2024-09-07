@@ -57,7 +57,7 @@ fun PrioridadScreen(prioridadDb: PrioridadDB) {
     val scope = rememberCoroutineScope()
     val lifecycleOwner = LocalLifecycleOwner.current
 
-    // Obtén la lista de prioridades desde la base de datos
+
     val prioridadList by prioridadDb.prioridadDAO().getAll()
         .collectAsStateWithLifecycle(
             initialValue = emptyList(),
