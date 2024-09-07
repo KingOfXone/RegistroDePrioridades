@@ -2,7 +2,7 @@ package edu.ucne.prioridades.data.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Prioridad")
+@Entity(tableName = "Prioridades")
 data class PrioridadEntity(
     @PrimaryKey
     val prioridadId: Int? =null,
