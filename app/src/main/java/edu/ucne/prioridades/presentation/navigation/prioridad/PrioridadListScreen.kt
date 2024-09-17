@@ -36,7 +36,8 @@ fun PrioridadListScreen(
     prioridadList: List<PrioridadEntity>,
     createPrioridad: () -> Unit,
     onEditPrioridad: (PrioridadEntity) -> Unit,
-    onDeletePrioridad: (PrioridadEntity) -> Unit // Nueva función para eliminar
+    onDeletePrioridad: (PrioridadEntity) -> Unit
+
 ) {
     Scaffold(
         topBar = {
@@ -53,7 +54,7 @@ fun PrioridadListScreen(
                 .padding(innerPadding)
 
         ) {
-            Button(onClick = createPrioridad,) {
+            Button(onClick = createPrioridad) {
                 Text(text = "Create Prioridad")
             }
 
